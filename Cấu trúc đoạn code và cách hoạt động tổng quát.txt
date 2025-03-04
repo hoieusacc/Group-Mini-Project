@@ -1,0 +1,39 @@
+1.	Cấu trúc code
+
+"Xin chào mọi người, hôm nay nhóm 4 sẽ trình bày về phương pháp giải bài toán N-Queens bằng C++. Phương pháp này giúp chúng ta đặt N quân hậu trên bàn cờ N×N sao cho không có hai quân hậu nào có thể tấn công lẫn nhau."
+
+"Đoạn code bao gồm các thành phần chính như sau:
+vector<int> queenIndex;: Đây là vector lưu trữ vị trí cột của các quân hậu cho mỗi hàng. Ví dụ, nếu x[2] = 3, nghĩa là có một quân hậu ở hàng 2, cột 3.
+
+vector<vector<int>> possibleSolution;: Đây là vector 2 chiều lưu trữ tất cả các giải pháp có thể. Mỗi giải pháp được biểu diễn bằng một vector của các vị trí cột của quân hậu trong mỗi hàng.
+vector<bool> mainDiagonal, primaryDiagonal, column;: Các vector này giúp kiểm tra xem có thể đặt một quân hậu tại một vị trí nhất định mà không bị tấn công hay không."
+
+"Chúng ta có hai hàm quan trọng:
+bool check(int row, int col): Hàm này kiểm tra xem có thể đặt một quân hậu tại vị trí (row, col) mà không bị tấn công bởi bất kỳ quân hậu nào khác.
+
+void NQueen(int row): Đây là hàm đệ quy chính cố gắng đặt các quân hậu theo từng hàng. Nếu tìm thấy một vị trí hợp lệ cho một quân hậu, nó sẽ cập nhật các vector và di chuyển đến hàng tiếp theo. Nếu tất cả quân hậu được đặt thành công, nó sẽ lưu giải pháp trong vector a."
+
+"Tiếp theo là hàm chính:
+Hàm main khởi tạo các vector cần thiết và đọc giá trị của N (kích thước của bàn cờ). Sau đó, nó gọi hàm NQueen để tìm tất cả các giải pháp có thể. Cuối cùng, nó in ra tổng số giải pháp và mỗi giải pháp dưới dạng ma trận."
+
+"Cuối cùng, chúng ta sẽ tóm tắt cách đoạn code hoạt động:
+Bắt đầu bằng cách khởi tạo các vector cần thiết và đọc kích thước của bàn cờ.
+Gọi hàm NQueen để đặt các quân hậu trên bàn cờ đệ quy.
+Đối với mỗi hàng, cố gắng đặt một quân hậu ở mỗi cột và kiểm tra xem đó có phải là vị trí hợp lệ không bằng cách sử dụng hàm check.
+Nếu tìm thấy vị trí hợp lệ, cập nhật các vector cột và đường chéo và tiếp tục đến hàng tiếp theo.
+Nếu tất cả các hàng đều được điền, giải pháp được lưu trữ trong vector a.
+Tổng số giải pháp và mỗi giải pháp được in dưới dạng ma trận."
+"Đoạn code giải bài toán N-Queens là một ví dụ điển hình về việc sử dụng phương pháp đệ quy để giải quyết các bài toán tổ hợp phức tạp. Hy vọng rằng qua phần trình bày này, các bạn đã hiểu rõ hơn về cách đoạn code hoạt động và các thành phần chính của nó."
+
+
+2.	Hoạt động chi tiết
+
+Xét tất cả các trường hợp đặt quân hậu của thứ nhất (có N trường hợp), với mỗi trường hợp đặt quân hậu thứ nhất, ta xét các cách đặt quân hậu thứ 2, quận hậu thứ 2 cũng cũng có thể đặt ở N ví trị trên hàng thứ 2, nhưng nó phải né tránh sau cho không bị quân hậu thứ nhất ăn được nó,... với quân hậu thứ i nó cũng sẽ có N cách đặt, và nó cũng phải né tránh những ô mà i - 1 quân hậu trước đó có thể ăn được nó 
+
+Cách kiểm tra một ô vuông có nằm trong tầm ngắm của các quân hậu trước đó hay không: Sử dụng mảng boolean c để đánh dấu các cột của bàn cờ (column[i] = true nếu trên cột i chưa đặt quân hậu nào) 
+
+Sử dụng mảng bool mainDiagonal để đánh dấu các đường chéo song song với đường chéo chính của bạn cờ (mainDiagonal[i - j + N -1] = true, nghĩa là đường chéo đi qua ô(i, j) và song song với đường chéo chính chưa được đặt quân hậu nào. 
+
+Sử dụng màng bool primaryDiagonal để đánh dấu các đường chéo song song với đường chéo phụ của bạn cờ (primaryDiagonal[i + j - 2] = true, nghĩa là đường chéo đi qua ô(i, j) và song song với đường chéo phụ chưa được đặt quân hậu nào. 
+
+Sau tìm xong vị trí của quân hậu thứ N thì ta lưu output đó lại.
